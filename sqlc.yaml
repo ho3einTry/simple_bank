@@ -1,0 +1,15 @@
+version: "2"
+sql:
+    - schema: "./db/migrations"
+      queries: "./db/query"
+      engine: "postgresql"
+      gen:
+          go:
+              package: "simpleBankDB"
+              out: "./db/sqlc"
+              emit_json_tags: true
+              emit_prepared_queries: true
+
+      database:
+          uri: "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable"
+
