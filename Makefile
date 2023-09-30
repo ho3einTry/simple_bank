@@ -8,8 +8,12 @@ migratedown:
 
 sqlcwin:
 	sqlc generate
+
 sqlcdocker:
 	 docker run --rm -v $(pwd):/src -w /src sqlc/sqlc generate
+
+server:
+	go run main.go
 
 test:
 	go test -v -cover -short ./...
