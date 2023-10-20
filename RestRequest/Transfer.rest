@@ -1,0 +1,43 @@
+@accountId = 100
+
+
+//create account
+###
+    POST http://localhost:8070/transfer
+    content-type: application/json
+
+{
+    "from_account_id": 58,
+    "to_account_id": 59,
+    "amount": 1,
+    "currency": "USD"
+}
+
+    // validation requierd
+###
+    POST http://localhost:8070/transfer
+    content-type: application/json
+
+    {
+        "owner": "",
+        "currency": ""
+    }
+
+// get account
+
+###
+    GET http://localhost:8070/account/{{accountId}}
+
+    //  validation not found
+###
+    GET http://localhost:8070/account/5000
+
+    //  validation min
+###
+    GET http://localhost:8070/account/-1
+
+// list account
+@page_id = 100
+@page_size= 5
+###
+    GET http://localhost:8070/account?page_id={{page_id}}&page_size={{page_size}}
