@@ -17,3 +17,8 @@ server:
 
 test:
 	go test -v -cover -short ./...
+
+mock:
+	mockgen -package mockdb -destination db/mock/Store.go simpleBank/db/sqlc Store
+
+.PHONY: migrateup migratedown sqlcwin sqlcdocker server test mock
