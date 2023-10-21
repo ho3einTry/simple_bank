@@ -9,10 +9,12 @@ import (
 )
 
 func CreateRandomAccount(params ...CreateAccountParams) (Account, error) {
+
 	var args CreateAccountParams
 	if len(params) == 0 {
+		user := CreateRandomUser()
 		args = CreateAccountParams{
-			Owner:    util.RandomOwner(),
+			Owner:    user.Username,
 			Balance:  util.RandomMoney(),
 			Currency: util.RandomCurrency(),
 		}
@@ -24,8 +26,9 @@ func CreateRandomAccount(params ...CreateAccountParams) (Account, error) {
 	return account, err
 }
 func TestCreateAccount(t *testing.T) {
+	user := CreateRandomUser()
 	param := CreateAccountParams{
-		Owner:    util.RandomOwner(),
+		Owner:    user.Username,
 		Balance:  util.RandomMoney(),
 		Currency: util.RandomCurrency(),
 	}

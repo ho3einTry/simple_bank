@@ -3,8 +3,14 @@ DB_URL=postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable
 migrateup:
 	migrate -path db/migrations -database "$(DB_URL)" -verbose up
 
+migrateup1:
+	migrate -path db/migrations -database "$(DB_URL)" -verbose up 1
+
 migratedown:
 	migrate -path db/migrations -database "$(DB_URL)" -verbose down
+
+migratedown1:
+	migrate -path db/migrations -database "$(DB_URL)" -verbose down 1
 
 sqlcwin:
 	sqlc generate
