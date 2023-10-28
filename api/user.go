@@ -5,9 +5,11 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"github.com/lib/pq"
+	"github.com/stretchr/testify/require"
 	"net/http"
 	simpleBankDB "simpleBank/db/sqlc"
 	"simpleBank/util"
+	"testing"
 	"time"
 )
 
@@ -126,4 +128,18 @@ func (server *Server) loginUser(ctx *gin.Context) {
 		User:                 newUserResponse(user),
 	}
 	ctx.JSON(http.StatusOK, rsp)
+}
+
+func randomUser(t *testing.T) (user simpleBankDB.User, password string) {
+	password = util.RandomString(6)
+	hashedPassword, err := util.HashPassword(password)
+	require.NoError(t, err)
+
+	user = simpleBankDB.User{
+		Username:       util.RandomOwner(),
+		HashedPassword: hashedPassword,
+		FullName:       util.RandomOwner(),
+		Email:          util.RandomEmail(),
+	}
+	return
 }
